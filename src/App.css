@@ -1,0 +1,61 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+  }
+  
+  body{
+    background: var(--color-bg);
+  }
+  
+  a {
+    color: unset;
+    text-decoration: none;
+  }
+  
+  .gradient-bg
+  {
+  
+      /* ff 3.6+ */
+      background:-moz-radial-gradient(circle at 0% 50%, rgba(53, 99, 159, 1) 15%, rgba(47, 62, 117, 1) 72%, rgba(20, 23, 58, 1) 100%);
+  
+      /* safari 5.1+,chrome 10+ */
+      background:-webkit-radial-gradient(circle at 0% 50%, rgba(53, 99, 159, 1) 15%, rgba(47, 62, 117, 1) 72%, rgba(20, 23, 58, 1) 100%);
+  
+      /* opera 11.10+ */
+      background:-o-radial-gradient(circle at 0% 50%, rgba(53, 99, 159, 1) 15%, rgba(47, 62, 117, 1) 72%, rgba(20, 23, 58, 1) 100%);
+  
+      /* ie 10+ */
+      background:-ms-radial-gradient(circle at 0% 50%, rgba(53, 99, 159, 1) 15%, rgba(47, 62, 117, 1) 72%, rgba(20, 23, 58, 1) 100%);
+  
+      /* global 92%+ browsers support */
+      background:radial-gradient(circle at 0% 50%, rgba(53, 99, 159, 1) 15%, rgba(47, 62, 117, 1) 72%, rgba(20, 23, 58, 1) 100%);
+  
+  }
+  
+  .section__padding{
+    padding: 3rem 6rem;
+  }
+  
+  .section__margin{
+    margin: 3rem 6rem;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .section__padding{
+        padding: 4rem;
+    }
+    .section__margin{
+        margin: 4rem;
+    }
+  }
+  
+  @media screen and (max-width: 550px) {
+    .section__padding{
+        padding: 4rem 2rem;
+    }
+    .section__margin{
+        margin: 4rem 2rem;
+    }
+  }

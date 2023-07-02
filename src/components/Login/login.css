@@ -1,0 +1,148 @@
+.login-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.loginpage {
+  width: 80%;
+  height: 80%;
+  position: relative;
+  border: 2px solid rgba(0, 12, 247, 0.5);
+  background-color: var(--bg-black-50);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gambar {
+  width: 500px;
+}
+
+.separator {
+  width: 1px;
+  height: 80%;
+  background-color: #ccc;
+  margin: 0 20px;
+}
+.loginvalue {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginvalue h2 {
+  font-size: 2em;
+  color: #1854b4;
+  text-align: center;
+  letter-spacing: 7px;
+}
+
+.inputlogin {
+  position: relative;
+  margin: 30px 0;
+  width: 310px;
+  border-bottom: 2px solid var(--skin-color);
+  border-radius: 5px;
+}
+
+.inputlogin:hover {
+  border-bottom: 2px solid blue;
+  transition: all ease 1s;
+}
+
+.inputlogin input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  padding: 0 35px 0 5px;
+  color: #000000;
+  padding-left: 27px;
+  letter-spacing: 0.5px;
+}
+
+.inputlogin .licon {
+  position: absolute;
+  color: #000000;
+  font-size: 1.2em;
+  top: 10px;
+}
+
+.forget {
+  margin: -15px 0 15px;
+  font-size: 1em;
+  color: #000000;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.forget label {
+  color: var(--text-black-900);
+  letter-spacing: 2px;
+}
+
+.forget label input {
+  margin-right: 4px;
+}
+
+.forget label a {
+  position: relative;
+  color: var(--skin-color);
+  text-decoration: none;
+}
+
+.forget label a:hover {
+  color: var(--text-black-900);
+}
+
+.forget label a:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  top: 25px;
+  left: 50%;
+  background-color: blue;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+}
+
+.forget label a:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+.loginvalue .btn {
+  width: 100%;
+}
+
+.register {
+  font-size: 0.9em;
+  color: var(--text-black-900);
+  text-align: center;
+  margin: 25px 0 10px;
+}
+
+.register a {
+  text-decoration: none;
+  color: var(--skin-color);
+  font-weight: 600;
+}
+
+.register p a:hover {
+  text-decoration: underline;
+}
