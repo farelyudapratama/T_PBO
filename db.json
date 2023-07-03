@@ -1,5 +1,18 @@
 {
   "users": [
-    
+    {
+      "id": "asd",
+      "nama": "yuda",
+      "password": "asd",
+      "email": "222@gmail.com"
+    }
+  ],
+  "admin": [
+    {
+      "id": "AdminPerpus",
+      "nama": "Farel",
+      "password":"123",
+      "email":"tes@gmail.com"
+    }
   ]
 }

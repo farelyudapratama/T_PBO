@@ -1,19 +1,18 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import { banner } from "../../assets";
 import './login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 async function fetchUsers() {
   try {
-    const response = await fetch('../../../tes.json');
+    const response = await fetch('../../db.json'); // Ubah path sesuai lokasi file db.json
     const data = await response.json();
-    return data.users;
+    return data;
   } catch (error) {
     console.error('Failed to fetch users:', error);
-    return [];
+    return {};
   }
 }
-
 
 const Login = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState('');
@@ -21,6 +20,7 @@ const Login = ({ isOpen, onClose }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [users, setUsers] = useState([]);
+  const [admin, setAdmin] = useState([]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -29,31 +29,41 @@ const Login = ({ isOpen, onClose }) => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
   useEffect(() => {
     async function fetchUsersData() {
-      const fetchedUsers = await fetchUsers();
-      setUsers(fetchedUsers);
+      const fetchedData = await fetchUsers();
+      setUsers(fetchedData.users);
+      setAdmin(fetchedData.admin);
     }
 
     fetchUsersData();
   }, []);
+
   const handleLogin = (e) => {
-    e.preventDefault(); // Prevent form submission
-  
-    // Logika untuk memproses login berdasarkan email dan password
+    e.preventDefault();
+
     const user = users.find((user) => user.email === email);
 
     if (user && user.password === password) {
-      // Login berhasil
       setIsLoggedIn(true);
-      setUsername(user.username);
+      setUsername(user.nama);
+      localStorage.setItem('memberId', user.id);
       onClose();
+      window.location.href = '/member'; // Redirect ke halaman Member setelah login berhasil
     } else {
-      // Kombinasi email dan password tidak valid
-      alert('Login failed. Invalid email or password.');
+      const adminUser = admin.find((admin) => admin.email === email);
+      if (adminUser && adminUser.password === password) {
+        setIsLoggedIn(true);
+        setUsername(adminUser.nama);
+        localStorage.setItem('adminId', adminUser.id);
+        onClose();
+        window.location.href = '/admin'; // Redirect ke halaman Admin setelah login admin berhasil
+      } else {
+        alert('Login failed. Invalid email or password.');
+      }
     }
   };
-  
 
   const handleClick = (e) => {
     if (e.target.classList.contains('login-modal')) {
@@ -65,14 +75,14 @@ const Login = ({ isOpen, onClose }) => {
     <div className={`login-modal ${isOpen ? 'open' : ''}`} onClick={handleClick}>
       <div className="loginpage">
         <div className="banner">
-          <img className="gambar"src={banner} alt="Banner" />
+          <img className="gambar" src={banner} alt="Banner" />
         </div>
         <div className="separator"></div>
         <div className="loginvalue">
           <form action="">
             <h2>Login</h2>
             <div className="inputlogin">
-            <i className='licon'><FontAwesomeIcon icon="envelope" /></i>
+              <i className='licon'><FontAwesomeIcon icon="envelope" /></i>
               <input
                 type="email"
                 placeholder="Masukkan Email"
@@ -98,24 +108,15 @@ const Login = ({ isOpen, onClose }) => {
               </label>
             </div>
             {isLoggedIn ? (
-              <div className="loggedin">
-                {username === 'MemberName' ? (
-                  <img src={memberProfileImage} alt="Member Profile" className="profile-image" />
-                ) : (
-                  <img src={adminProfileImage} alt="Admin Profile" className="profile-image" />
-                )}
-                <span>{username}</span>
+              <div className="success">
+                <span>Logged in successfully!</span>
+                <span>Welcome, {username}!</span>
               </div>
             ) : (
-              <button className="btn" type="submit"  onClick={handleLogin}>
-                Log in
+              <button className='btn' type="submit" onClick={handleLogin}>
+                Login
               </button>
             )}
-            <div className="register">
-              <p>
-                Don't have an account? <a href="#">Register</a>
-              </p>
-            </div>
           </form>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import {NavbarHome, Search, Bukurekom, Bukudipinjam} from '../components';
 import './dash.css'
 import { memberPhoto } from '../assets';
 import { ManageMember } from '../components';
@@ -9,7 +8,9 @@ const dashboardadmin = () => {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
+    window.location.hash = option;
   };
+  
   return (
     <div>
       <div className="dashboard">
@@ -22,30 +23,35 @@ const dashboardadmin = () => {
           <div
             className={`sidebar-option ${selectedOption === 'Profile' ? 'active' : ''}`}
             onClick={() => handleOptionClick('Profile')}
+            id="Profile"
           >
             Profile
           </div>
           <div
             className={`sidebar-option ${selectedOption === 'Manajemenbuku' ? 'active' : ''}`}
             onClick={() => handleOptionClick('Manajemenbuku')}
+            id="Manajemenbuku"
           >
             Manajemen Pustaka
           </div>
           <div
             className={`sidebar-option ${selectedOption === 'Manajemenanggota' ? 'active' : ''}`}
             onClick={() => handleOptionClick('Manajemenanggota')}
+            id='Manajemenanggota'
           >
             Manaejemen Anggota
           </div>
           <div
             className={`sidebar-option ${selectedOption === 'Laporan' ? 'active' : ''}`}
             onClick={() => handleOptionClick('Laporan')}
+            id='Laporan'
           >
             Pelaporan
           </div>
           <div
             className={`sidebar-option ${selectedOption === 'logout' ? 'active' : ''}`}
-            onClick={() => handleOptionClick('Setting')}
+            onClick={() => handleOptionClick('Logout')}
+            id='Logout'
           >
             LogOut
           </div>

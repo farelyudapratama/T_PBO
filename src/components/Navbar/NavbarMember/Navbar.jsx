@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { logo, memberPhoto } from "../../../assets";
 import "./Navbar.css";
 
 const Navbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [memberIdState, setMemberIdState] = useState(""); // Tambahkan state memberIdState
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
   const selectCategory = (category) => {
     setSelectedCategory(category);
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    // Ambil memberId dari penyimpanan lokal saat komponen Navbar dimuat
+    const memberId = localStorage.getItem('memberId');
+    setMemberIdState(memberId);
+  }, []);
+
+  const handleLogout = () => {
+    // Hapus memberId dari penyimpanan lokal dan set state memberIdState menjadi kosong saat logout
+    localStorage.removeItem('memberId');
+    setMemberIdState('');
+    window.location.href = "/";
+  };
+
   return (
     <div className="navbar">
       <div className="navbar-links">
@@ -27,7 +43,7 @@ const Navbar = (props) => {
           <div className={`toggle ${isOpen ? "category-dropdown" : ""}`}>
             <div className="dropToggle" onClick={toggleDropdown}>
               <p>
-                <a>Member</a>
+                <a>{memberIdState ? memberIdState : "Member"}</a> {/* Tampilkan memberId jika ada, jika tidak tampilkan "Member" */}
               </p>
               <i className={`arrow ${isOpen ? "open" : ""}`}></i>
             </div>
@@ -42,7 +58,7 @@ const Navbar = (props) => {
                 <div className="dropdown-item" onClick={() => selectCategory("Pengembalian")}>
                   Pengembalian
                 </div>
-                <div className="dropdown-item" onClick={() => selectCategory("Logout")}>
+                <div className="dropdown-item" onClick={handleLogout}> {/* Tambahkan event handler untuk logout */}
                   Logout
                 </div>
               </div>

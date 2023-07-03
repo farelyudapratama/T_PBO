@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './RegisterMember.css';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
-const ManageMember = () => {
+const RegisterMember = ({ isOpen, onClose }) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [nama, setNama] = useState('');
   const [email, setEmail] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -34,26 +34,24 @@ const ManageMember = () => {
     }
 
     if (!isproceed) {
-      toast.warning(errormessage)
+      toast.warning(errormessage);
     } else {
-      if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
-
-      } else {
+      if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
         isproceed = false;
-        toast.warning('Mohon masukkan Email dengan benar')
+        toast.warning('Mohon masukkan Email dengan benar');
       }
     }
     return isproceed;
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let regobj = { id, nama, password, email };
     if (IsValidate()) {
       fetch('http://localhost:8000/users', {
-        method: "POST",
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(regobj)
+        body: JSON.stringify(regobj),
       })
         .then(() => {
           toast.success('Pendaftaran Berhasil');
@@ -70,9 +68,15 @@ const ManageMember = () => {
     }
   };
 
+  const handleClick = (e) => {
+    if (e.target.classList.contains('register-member')) {
+      onClose();
+    }
+  };
 
   return (
-    <div>
+    <div className={`register-member ${isOpen ? 'open' : ''}`} onClick={handleClick}>
+      <ToastContainer />
       <div className="containerForm">
         <form className="container" onSubmit={handleSubmit}>
           <div className="card">
@@ -82,17 +86,13 @@ const ManageMember = () => {
             <div className="card-body">
               <div className="row">
                 <div className="colum">
-                  <div className="form-grup">
+                  <div className="form-group">
                     <label>Username</label>
-                    <input
-                      value={id}
-                      onChange={(e) => setId(e.target.value)}
-                      className="form-control"
-                    />
+                    <input value={id} onChange={(e) => setId(e.target.value)} className="form-control" />
                   </div>
                 </div>
                 <div className="colum">
-                  <div className="form-grup">
+                  <div className="form-group">
                     <label>Password</label>
                     <input
                       value={password}
@@ -100,33 +100,21 @@ const ManageMember = () => {
                       type={showPassword ? 'text' : 'password'}
                       className="form-control"
                     />
-                    <button
-                      type="button"
-                      className="show-password-button"
-                      onClick={toggleShowPassword}
-                    >
+                    <button type="button" className="show-password-button" onClick={toggleShowPassword}>
                       {showPassword ? 'Hide' : 'Show'}
                     </button>
                   </div>
                 </div>
                 <div className="colum">
-                  <div className="form-grup">
+                  <div className="form-group">
                     <label>Nama Lengkap</label>
-                    <input
-                      value={nama}
-                      onChange={(e) => setNama(e.target.value)}
-                      className="form-control"
-                    />
+                    <input value={nama} onChange={(e) => setNama(e.target.value)} className="form-control" />
                   </div>
                 </div>
                 <div className="colum">
-                  <div className="form-grup">
+                  <div className="form-group">
                     <label>Email</label>
-                    <input
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="form-control"
-                    />
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" />
                   </div>
                 </div>
               </div>
@@ -135,9 +123,6 @@ const ManageMember = () => {
               <button type="submit" className="btn">
                 Register
               </button>
-              <Link to={'/login'} className="btnCls">
-                Close
-              </Link>
             </div>
           </div>
         </form>
@@ -146,4 +131,4 @@ const ManageMember = () => {
   );
 };
 
-export default ManageMember;
+export default RegisterMember;

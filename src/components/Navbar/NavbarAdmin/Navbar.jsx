@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { logo, adminPhoto } from "../../../assets";
 import "./Navbar.css";
 
 const Navbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [adminIdState, setadminIdState] = useState("");
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -13,6 +14,19 @@ const Navbar = (props) => {
     setSelectedCategory(category);
     setIsOpen(false);
   };
+  useEffect(() => {
+    // Ambil adminId dari penyimpanan lokal saat komponen Navbar dimuat
+    const adminId = localStorage.getItem('adminId');
+    setadminIdState(adminId);
+  }, []);
+
+  const handleLogout = () => {
+    // Hapus adminId dari penyimpanan lokal dan set state adminIdState menjadi kosong saat logout
+    localStorage.removeItem('adminId');
+    setadminIdState('');
+    window.location.href = "/";
+  };
+  
   return (
     <div className="navbar">
     <div className="navbar-links">
@@ -21,13 +35,13 @@ const Navbar = (props) => {
         <a>Perpus Web Tes</a>
       </div>
       <div className="navbar-links-container">
-        <div className="member-photo">
-          <img src={adminPhoto} alt="member" />
+        <div className="admin-photo">
+          <img src={adminPhoto} alt="admin" />
         </div>
         <div className={`toggle ${isOpen ? "category-dropdown" : ""}`}>
           <div className="dropToggle" onClick={toggleDropdown}>
             <p>
-              <a>Admin</a>
+              <a>{adminIdState ? adminIdState : "admin"}</a>
             </p>
             <i className={`arrow ${isOpen ? "open" : ""}`}></i>
           </div>
@@ -45,7 +59,7 @@ const Navbar = (props) => {
               <div className="dropdown-item" onClick={() => selectCategory("LaporanPeminjaman")}>
               Laporan Peminjaman
               </div>
-              <div className="dropdown-item" onClick={() => selectCategory("Logout")}>
+              <div className="dropdown-item" onClick={handleLogout}>
                 Logout
               </div>
             </div>
