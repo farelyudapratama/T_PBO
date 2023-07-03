@@ -5,4 +5,5 @@ export { default as Search } from './Search/Search';
 export { default as Login } from './Login/Login';
 export { default as Bukudipinjam } from './Bukudipinjam/Bukudipinjam';
 export { default as Bukurekom } from './Bukurekom/Bukurekom';
+export { default as RegisterMember } from './RegisterMember/RegisterMember';
 export { default as ManageMember } from './ManageMember/ManageMember';
