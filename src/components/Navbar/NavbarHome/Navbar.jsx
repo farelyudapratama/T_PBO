@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { logo } from "../../../assets";
-import "./Navbar.css";
+import "./navbar.css";
 import LoginModal from "../../Login/Login";
 
 const Navbar = (props) => {
