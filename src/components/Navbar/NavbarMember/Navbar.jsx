@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { logo, memberPhoto } from "../../../assets";
-import "./Navbar.css";
+import "./navbar.css";
 
 const Navbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
