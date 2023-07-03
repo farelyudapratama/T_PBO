@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { banner } from "../../assets";
 import './login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 async function fetchUsers() {
   try {
@@ -60,7 +62,7 @@ const Login = ({ isOpen, onClose }) => {
         onClose();
         window.location.href = '/admin'; // Redirect ke halaman Admin setelah login admin berhasil
       } else {
-        alert('Login failed. Invalid email or password.');
+        toast.error('Gagal Masuk, Silahkan masukkan Email dan Password dengan benar');
       }
     }
   };
@@ -73,6 +75,7 @@ const Login = ({ isOpen, onClose }) => {
 
   return (
     <div className={`login-modal ${isOpen ? 'open' : ''}`} onClick={handleClick}>
+      <ToastContainer />
       <div className="loginpage">
         <div className="banner">
           <img className="gambar" src={banner} alt="Banner" />

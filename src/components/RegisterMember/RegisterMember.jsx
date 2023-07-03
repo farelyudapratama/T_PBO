@@ -2,70 +2,85 @@ import React, { useState } from 'react';
 import './RegisterMember.css';
 import { toast, ToastContainer } from 'react-toastify';
 
-const RegisterMember = ({ isOpen, onClose }) => {
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [nama, setNama] = useState('');
-  const [email, setEmail] = useState('');
+const RegisterMember = ({ isOpen, onClose, selectedMember, onRefresh}) => {
+  const [id, setId] = useState(selectedMember ? selectedMember.id : '');
+  const [password, setPassword] = useState(selectedMember ? selectedMember.password : '');
+  const [nama, setNama] = useState(selectedMember ? selectedMember.nama : '');
+  const [email, setEmail] = useState(selectedMember ? selectedMember.email : '');
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const IsValidate = () => {
-    let isproceed = true;
-    let errormessage = 'Mohon masukkan nilai di ';
-    if (id === null || id === '') {
-      isproceed = false;
-      errormessage += ' Username,';
+  const validateInput = () => {
+    let isValid = true;
+    let errorMessage = 'Mohon masukkan nilai di ';
+
+    if (!id) {
+      isValid = false;
+      errorMessage += 'Username, ';
     }
-    if (nama === null || nama === '') {
-      isproceed = false;
-      errormessage += ' Nama Lengkap,';
+    if (!nama) {
+      isValid = false;
+      errorMessage += 'Nama Lengkap, ';
     }
-    if (password === null || password === '') {
-      isproceed = false;
-      errormessage += ' Password,';
+    if (!password) {
+      isValid = false;
+      errorMessage += 'Password, ';
     }
-    if (email === null || email === '') {
-      isproceed = false;
-      errormessage += ' Email.';
+    if (!email) {
+      isValid = false;
+      errorMessage += 'Email. ';
     }
 
-    if (!isproceed) {
-      toast.warning(errormessage);
-    } else {
-      if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
-        isproceed = false;
-        toast.warning('Mohon masukkan Email dengan benar');
-      }
+    if (!isValid) {
+      toast.warning(errorMessage);
+    } else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
+      isValid = false;
+      toast.warning('Mohon masukkan Email dengan benar');
     }
-    return isproceed;
+
+    return isValid;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let regobj = { id, nama, password, email };
-    if (IsValidate()) {
-      fetch('http://localhost:8000/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(regobj),
-      })
-        .then(() => {
-          toast.success('Pendaftaran Berhasil');
 
-          // Reset form
+    if (!validateInput()) {
+      return;
+    }
+
+    const memberData = { id, nama, password, email };
+
+    const requestOptions = {
+      method: selectedMember ? 'PUT' : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(memberData),
+    };
+
+    const apiUrl = selectedMember ? `http://localhost:8000/users/${selectedMember.id}` : 'http://localhost:8000/users';
+
+    fetch(apiUrl, requestOptions)
+      .then((response) => {
+        if (response.ok) {
+          toast.success(`${selectedMember ? 'Update' : 'Pendaftaran'} Berhasil`);
+
           setId('');
           setPassword('');
           setNama('');
           setEmail('');
-        })
-        .catch(() => {
-          toast.error('Gagal melakukan pendaftaran');
-        });
-    }
+          onRefresh()
+
+          // onClose();
+        } else {
+          toast.error(`Gagal melakukan ${selectedMember ? 'Update' : 'pendaftaran'}`);
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        toast.error(`Gagal melakukan ${selectedMember ? 'Update' : 'pendaftaran'}`);
+      });
   };
 
   const handleClick = (e) => {
@@ -121,7 +136,7 @@ const RegisterMember = ({ isOpen, onClose }) => {
             </div>
             <div className="card-footer">
               <button type="submit" className="btn">
-                Register
+                {selectedMember ? 'Update' : 'Register'}
               </button>
             </div>
           </div>

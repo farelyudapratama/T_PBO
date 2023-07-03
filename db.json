@@ -2,17 +2,71 @@
   "users": [
     {
       "id": "asd",
-      "nama": "yuda",
+      "nama": "cxzcczvvsv",
       "password": "asd",
       "email": "222@gmail.com"
+    },
+    {
+      "id": "12",
+      "nama": "sadd",
+      "password": "dasd",
+      "email": "qw@gg.com"
+    },
+    {
+      "id": "123",
+      "nama": "popo Yuda",
+      "password": "dsad",
+      "email": "ponilempar7@gmail.com"
+    },
+    {
+      "id": "asdasd",
+      "nama": "yuda",
+      "password": "asda",
+      "email": "222@gmail.com"
+    },
+    {
+      "id": "asdx",
+      "nama": "sa",
+      "password": "asdczcc",
+      "email": "cz@gmail.com"
+    },
+    {
+      "id": "cc",
+      "nama": "awdwfe",
+      "password": "zvcd",
+      "email": "tes@gmail.com"
+    },
+    {
+      "id": "wadd",
+      "nama": "xcvczv",
+      "password": "adcdc",
+      "email": "wedq3e@g.vo"
+    },
+    {
+      "id": "asdQE2",
+      "nama": "dwe",
+      "password": "fadcxzc",
+      "email": "czvvdadwd@gna.cs"
+    },
+    {
+      "id": "adwdSCddVASDAFGSTYDFUIL..KJ",
+      "nama": "asdacz",
+      "password": "scwdaf",
+      "email": "tes@gmail.com"
+    },
+    {
+      "id": "adwa",
+      "nama": "zc",
+      "password": "sad",
+      "email": "tes@gmail.com"
     }
   ],
   "admin": [
     {
       "id": "AdminPerpus",
       "nama": "Farel",
-      "password":"123",
-      "email":"tes@gmail.com"
+      "password": "123",
+      "email": "tes@gmail.com"
     }
   ]
 }

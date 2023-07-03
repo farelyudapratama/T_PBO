@@ -26,7 +26,9 @@ const Navbar = (props) => {
     setadminIdState('');
     window.location.href = "/";
   };
-  
+  const clickDashboard = () =>{
+    window.location.href = "/DashboardAdmin";
+  }
   return (
     <div className="navbar">
     <div className="navbar-links">
@@ -47,17 +49,8 @@ const Navbar = (props) => {
           </div>
           {isOpen && (
             <div className="dropdown-menu">
-              <div className="dropdown-item" onClick={() => selectCategory("Profil")}>
-                Profil
-              </div>
-              <div className="dropdown-item" onClick={() => selectCategory("ManajemenPustaka")}>
-              Manajemen Pustaka
-              </div>
-              <div className="dropdown-item" onClick={() => selectCategory("ManajemenAnggota")}>
-              Manajemen Anggota
-              </div>
-              <div className="dropdown-item" onClick={() => selectCategory("LaporanPeminjaman")}>
-              Laporan Peminjaman
+              <div className="dropdown-item" onClick={clickDashboard}>
+                Dashboard
               </div>
               <div className="dropdown-item" onClick={handleLogout}>
                 Logout

@@ -5,12 +5,18 @@ import { ManageMember } from '../components';
 
 const dashboardadmin = () => {
   const [selectedOption, setSelectedOption] = useState('Profile');
-
+  const [adminIdState, setadminIdState] = useState("");
+  
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     window.location.hash = option;
   };
-  
+
+  const handleLogout = () => {
+    localStorage.removeItem('adminId');
+    setadminIdState('');
+    window.location.href = "/";
+  };
   return (
     <div>
       <div className="dashboard">
@@ -50,7 +56,7 @@ const dashboardadmin = () => {
           </div>
           <div
             className={`sidebar-option ${selectedOption === 'logout' ? 'active' : ''}`}
-            onClick={() => handleOptionClick('Logout')}
+            onClick={handleLogout}
             id='Logout'
           >
             LogOut
