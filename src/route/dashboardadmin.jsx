@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './dash.css'
-import { memberPhoto } from '../assets';
+import { adminPhoto } from '../assets';
 import { ManageMember } from '../components';
 
 const dashboardadmin = () => {
@@ -73,7 +73,7 @@ const dashboardadmin = () => {
 const Profile = () => {
   return <div>
     <div className="fotoprofile">
-      <img src={memberPhoto} alt="member" />
+      <img src={adminPhoto} alt="admin" />
     </div>
     <div className="detail">
       <p>
