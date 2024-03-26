@@ -1,11 +1,12 @@
 # T_PBO
 Tugas mata kuliah PBO
-Next.JS
+
+Menggunakan Next.JS
 
 Dimana disini membuat sebuah web perpustakaan
 
 Baru selesai sampai admin login dan CRUD user oleh admin
 
+untuk menjalankan : npm run dev
 
-npm run dev
-json-server --watch db.json --port 8000
+Untuk menjalankan server json : json-server --watch db.json --port 8000
